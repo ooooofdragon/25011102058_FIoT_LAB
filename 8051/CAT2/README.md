@@ -10,39 +10,22 @@
 
 ---
 
-## TASK 2A : Hardware Board Bring-Up
+## Overview
 
-### 1. Circuit Diagram
+This experiment covers the foundational hardware bring-up of the Atmel AT89S52 microcontroller, configuring the Keil C51 compiler toolchain, and implementing bare-metal GPIO output and reusable software delays.
 
-The experiment demonstrates initial board bring-up, verifying power distribution, clock oscillation, and active-high reset integrity.
+## Dedicated Tasks
 
-- **Development Board / Core:** 8051 Development Board
-- **Microcontroller IC:** Atmel AT89S52 (40-Pin DIP)
-- **GPIO Pin(s) / Peripherals:** VCC (Pin 40), GND (Pin 20), EA/VPP (Pin 31), RST (Pin 9)
-- **Power Supply / Interface:** 5V Regulated DC Supply
+- **[TASK 2A: Hardware Board Bring-Up](TASK2A/)**: Verification of power rails, clock oscillator (11.0592 MHz), and reset circuitry.
+- **[TASK 2B: 1 Hz LED Blink on Port 2](TASK2B/)**: Continuous 1 Hz square-wave blinking of all 8 LEDs on Port 2.
+- **[TASK 2C: Reusable Software Delay Library](TASK2C/)**: Calibrated millisecond delay library based on machine cycle calculation.
+
+### Circuit Diagram
+
+The overall hardware schematic for Continuous Assessment 2 is shown below:
 
 ![Circuit Diagram](circuit.png)
 
-### 2. Core Logic / Pseudocode / Code Base
+### Inference
 
-**Working Principle:**
-
-The AT89S52 requires a stable 5V rail, an external 11.0592 MHz quartz crystal with two 33pF ceramic capacitors, and an active-high RC reset network. Once EA is tied to VCC, execution starts from address 0x0000.
-
-**Pseudocode:**
-
-1. Connect regulated 5V DC power supply to VCC and GND.
-2. Confirm 5V DC across Pin 40 and Pin 20.
-3. Ensure Pin 31 (EA) is connected to +5V.
-4. Observe 11.0592 MHz sine wave on XTAL1/XTAL2.
-5. Press Reset button to trigger active-high pulse on Pin 9.
-
-**Code Base:**
-
-- `reg51.h`: Provides standard 8051 register definitions.
-- `STARTUP.A51`: Initializes data memory and sets the program counter to `0x0000`.
-- `P2 = 0xFF`: Sets Port 2 to inactive high state.
-
-### 3. Inference
-
-Hardware supply rails, crystal clock, and reset behavior were verified to be fully operational.
+The 8051 development board was brought up successfully. GPIO digital output switching was confirmed on Port 2 with calibrated software timing.
