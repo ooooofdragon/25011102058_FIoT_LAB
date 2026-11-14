@@ -6,43 +6,26 @@
 
 **NAME OF EXP:** Human-Machine Interface using Matrix Keypad, LEDs & 7-Segment Display
 
-**HARDWARE SETUP / PLATFORM:** AT89S52 Microcontroller + 4x4 Matrix Keypad
+**HARDWARE SETUP / PLATFORM:** AT89S52 Microcontroller + 4x4 Matrix Keypad + Common-Anode 7-Segment + 4 LEDs
 
 ---
 
-## TASK 4A : 4x4 Keypad Row-Column Scanning HMI
+## Overview
 
-### 1. Circuit Diagram
+This experiment covers human-machine interfacing (HMI) using an 8051 microcontroller, including matrix keypad row-column scanning, 7-segment display numeric decoding, and keypad-triggered LED animation control.
 
-The experiment demonstrates row-column scanning on a 4x4 matrix keypad to identify pressed keys.
+## Dedicated Tasks
 
-- **Development Board / Core:** 8051 Development Board
-- **Microcontroller IC:** Atmel AT89S52 (40-Pin DIP)
-- **GPIO Pin(s) / Peripherals:** Port 1 (P1.0 - P1.3 as Row Outputs, P1.4 - P1.7 as Column Inputs)
-- **Power Supply / Interface:** 4x4 Matrix Keypad + 10kΩ Pull-Up Resistors
+- **[TASK 4A: 4x4 Keypad Row-Column Scanning HMI](TASK4A/)**: Matrix scanning algorithm detecting key presses and mapping them to ASCII characters.
+- **[TASK 4B: 7-Segment Display Output Driver](TASK4B/)**: Driving a common-anode 7-segment display with decoded numeric hex patterns (0-9).
+- **[TASK 4C: Keypad-Controlled LED Patterns](TASK4C/)**: Interactive control triggering unique LED animation patterns based on keypad inputs.
+
+### Circuit Diagram
+
+The overall hardware schematic for Continuous Assessment 4 is shown below:
 
 ![Circuit Diagram](circuit.png)
 
-### 2. Core Logic / Pseudocode / Code Base
+### Inference
 
-**Working Principle:**
-
-Rows are sequentially pulled LOW one by one while columns are read. When a key is pressed, it pulls the intersecting column line LOW. Software matches the active row and column indices to identify the key.
-
-**Pseudocode:**
-
-1. Set all column pins (P1.4-P1.7) as inputs with pull-ups.
-2. Drive Row 0 LOW, Rows 1-3 HIGH.
-3. Read column pins; if any is LOW, identify pressed key.
-4. Repeat for Row 1, Row 2, and Row 3 sequentially.
-5. Debounce the detected key and return corresponding key code.
-
-**Code Base:**
-
-- `P1`: Interfaced to 4x4 keypad matrix.
-- `unsigned char keypad_scan()`: Scanning routine returning character.
-- `delay_ms(20)`: Software debounce filter.
-
-### 3. Inference
-
-Matrix row-column scanning reliably identified every key pressed on the 4x4 keypad.
+The 4x4 matrix keypad and 7-segment display were successfully interfaced with the AT89S52, establishing robust interactive input/output control.
